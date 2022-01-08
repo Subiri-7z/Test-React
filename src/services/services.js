@@ -47,19 +47,50 @@ export const getVenues = async () => {
     ]
 }
 
-export const listOffers = async () => {
+export const getOffers = async (idBusiness) => {
     return [
         {
             id: 1,
             amount: 220000,
-            user: "John",
-            date: "2022-01-08 20:25"
+            user: {
+                name: "John",
+                address: "14 My Street",
+                city: "Southampton",
+                postcode: "SO53 5PD",
+                country: "UK",
+            },
+            date: "2022-01-08 20:25",
+            message: "This message is really lengthy..."
         },
         {
             id: 4,
             amount: 222000,
-            user: "Pepe",
-            date: "2021-11-28 10:13"
+            user: {
+                name: "Pepe",
+                address: "30 My Another Street",
+                city: "London",
+                postcode: "BR1 3AE",
+                country: "UK",
+            },
+            date: "2021-11-28 10:13",
+            message: "This is another lengthy message by an user whom's got an offer..."
         },
     ]
+}
+
+export const getOfferDetails = async (idOffer) => {
+    return {
+        id: 1,
+        venueid: 1,
+        amount: 220000,
+        user: {
+            name: "John",
+            address: "14 My Street",
+            city: "Southampton",
+            postcode: "SO53 5PD",
+            country: "UK",
+        },
+        date: "2022-01-08 20:25",
+        message: "This message is really lengthy...",
+    };
 }

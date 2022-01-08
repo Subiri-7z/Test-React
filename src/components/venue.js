@@ -5,7 +5,7 @@ function Venue({venue}) {
     const listOffers = () => {
         history.push({
             pathname: '/offers',
-            search: `?offer=${venue.id}`,  // query string
+            search: `?venue=${venue.id}`,  // query string
         });
     }
 
