@@ -4,6 +4,7 @@ import RouteHandler from "./routes/RouteHandler"
 import configureStore from "./redux/store";
 import {PersistGate} from 'redux-persist/integration/react'
 import {Provider} from 'react-redux'
+import Navbar from './components/navbar/index';
 
 export default function App() {
     const {store, persistor} = configureStore();
@@ -12,6 +13,7 @@ export default function App() {
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router>
+                    <Navbar />
                     <Switch>
                         {routes.map(r =>
                             <RouteHandler path={r.path} component={r.component} />
