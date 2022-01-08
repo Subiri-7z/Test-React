@@ -1,3 +1,56 @@
 .error{
-    background: red;
+    background: rgba( 255, 40, 40, 0.15 );
+    border-color: red;
+}
+.FlexContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 80vh;
+    overflow: auto;
+    flex-direction: column;
+    text-align: center;
+}
+
+.FlexContainer div {
+    width: 50%;
+    height: 50%;
+    margin: 5px;
+    background-color: lightblue;
+    background: rgba( 196, 40, 40, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 7.5px );
+    -webkit-backdrop-filter: blur( 7.5px );
+    border-radius: 10px;
+}
+
+form {
+    display: inline-block;
+}
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type=submit] {
+  width: 25%;
+  background-color: #842823;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #842121;
 }

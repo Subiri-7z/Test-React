@@ -19,7 +19,7 @@ function Login() {
         console.log(vemail);
         console.log(vpassword);
         if (vemail && vpassword) {
-            //console.log("Login ejecutado correctamente.");
+            //console.log("Login executed correctly");
             login(email, password)
                 .then(response => console.log(response));
             history.push("/venues");
@@ -27,47 +27,39 @@ function Login() {
 
         }
         else {
-            console.log("Ha petat");
+            console.log("Error");
 
         }
 
-
-        //const data = {email, password};
-        //const requestOptions = {
-        //method: "POST",
-        //headers: {
-        //"Content-Type": "application/json",
-        //"Origin": "http://localhost:3000/",
-        //},
-        //body: JSON.stringify(data)
-        //};
-        //fetch("https://api-development.rodeoworld.co.uk/businesses/login", requestOptions)
-        //.then(response => response.json())
-        //.then(res => console.log(res));
     };
     return (
         <>
-            {error
-                &&
-                <h1>USER NOT REGISTERED</h1>}
-            <form>
-                <label>Email:
-                    <input
-                        className={errorEmail ? 'error' : ''}
-                        type="text"
-                        value={email}
-                        required
-                        onChange={onEmailChange} />
-                </label>
-                <label>Password:
-                    <input
-                        className={errorPassword ? 'error' : ''}
-                        type="password"
-                        value={password}
-                        onChange={onPasswordChange} />
-                </label>
-                <button type="submit" onClick={handleSubmit}>Login</button>
-            </form>
+            <section className='FlexContainer'>
+                <div>
+                    {error
+                        &&
+                        <h1>USER NOT REGISTERED</h1>}
+                    <h2>LOGIN</h2>
+                    <form>
+                        <label>Email:
+                            <input
+                                className={errorEmail ? 'error' : ''}
+                                type="text"
+                                value={email}
+                                required
+                                onChange={onEmailChange} />
+                        </label>
+                        <label>Password:
+                            <input
+                                className={errorPassword ? 'error' : ''}
+                                type="password"
+                                value={password}
+                                onChange={onPasswordChange} />
+                        </label>
+                        <button type="submit" onClick={handleSubmit}>Login</button>
+                    </form>
+                </div>
+            </section>
         </>
 
     );
