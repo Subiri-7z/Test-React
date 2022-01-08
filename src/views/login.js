@@ -1,29 +1,41 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {connect} from "react-redux";
 import {login} from "../services/services";
 import './login.css'
 import useEmail from "../hooks/useEmail";
 import usePassword from "../hooks/usePassword";
 import {useHistory} from "react-router-dom";
+import {login as loginAction} from "../redux/actions/user.actions";
 
-function Login() {
+function Login({loginAction, user}) {
     const history = useHistory();
     const {email, onEmailChange, errorEmail, isValidEmail} = useEmail();
     const {password, onPasswordChange, errorPassword, isValidPassword} = usePassword();
     const [error, setError] = useState(false);
 
+    useEffect(() => {
+        if (user.token !== '')
+            history.push("/venues");
+    }, [user])
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
         const vemail = isValidEmail();
         const vpassword = isValidPassword();
 
-        console.log(vemail);
-        console.log(vpassword);
         if (vemail && vpassword) {
             //console.log("Login executed correctly");
             login(email, password)
-                .then(response => console.log(response));
-            history.push("/venues");
-            setError(true);
+                .then(response => {
+                    const {status, data} = response;
+                    if (status === 200) {
+                        loginAction(data);
+                    }
+                    else if (status === 401)
+                        setError(true);
+                })
+            //setError(true);
 
         }
         else {
@@ -65,5 +77,11 @@ function Login() {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+const mapDispatchToProps = {loginAction};
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
