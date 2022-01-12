@@ -5,41 +5,37 @@ import {useEffect, useState} from "react";
 import {getOfferDetails} from "../services/services";
 
 function OfferDetails({user, logout}) {
-    const history = useHistory();
-    const location = useLocation();
+  const history = useHistory();
+  const location = useLocation();
 
-    const offerId = location.search.split("=")[1];
+  const offerId = location.search.split("=")[1];
+  const token = user.token
 
-    const goBack = () => {
-        history.push({
-            pathname: '/offers',
-            search: `?venue=${offerdetails.venueid}`,  // query string
-        });
-    }
+  const [offerdetails, setOfferDetails] = useState({});
 
-    const [offerdetails, setOfferDetails] = useState({});
+  useEffect(() => {
+    getOfferDetails(token, offerId)
+      .then((response) => {setOfferDetails(response)})
+  }, [])
 
-    useEffect(() => {
-        getOfferDetails((offerId))
-            .then((response) => {console.log(response); setOfferDetails(response)})
-    }, [])
-    //console.log(offerdetails)
-
-    return (
-        <>
-            <h2>Offer {offerId} Details</h2>
-            <p>Amount: {offerdetails.amount}</p>
-            <p>Date: {offerdetails.date}</p>
-            <button onClick={logout}>Log out</button>
-            <button onClick={goBack}>Back</button>
-        </>
-    );
+  return (
+    <>
+      <h2>Offer {offerId} Details</h2>
+      <h3>Title: {offerdetails.title}</h3>
+      <p>Category: {offerdetails.categoryName}</p>
+      <p>Subcategory: {offerdetails.subcategoryName}</p>
+      <p>Hours: {offerdetails.startHour} - {offerdetails.endHour}</p>
+      <p>Description: {offerdetails.description}</p>
+      <small>Detail: {offerdetails.detail}</small><br />
+      <button onClick={history.goBack}>Back</button>
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    }
+  return {
+    user: state.user
+  }
 }
 const mapDispatchToProps = {logout};
 

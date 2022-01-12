@@ -7,20 +7,20 @@ import {Provider} from 'react-redux'
 import Navbar from './components/navbar/index';
 
 export default function App() {
-    const {store, persistor} = configureStore();
+  const {store, persistor} = configureStore();
 
-    return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <Router>
-                    <Navbar />
-                    <Switch>
-                        {routes.map(r =>
-                            <RouteHandler path={r.path} component={r.component} />
-                        )}
-                    </Switch>
-                </Router>
-            </PersistGate>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Navbar />
+          <Switch>
+            {routes.map(r =>
+              <RouteHandler path={r.path} component={r.component} />
+            )}
+          </Switch>
+        </Router>
+      </PersistGate>
+    </Provider>
+  );
 }

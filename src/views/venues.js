@@ -7,36 +7,38 @@ import Venue from "../components/venue";
 
 function Venues({user, logout}) {
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const [venues, setVenues] = useState([]);
+  const idBusiness = user.idBusiness
+  const token = user.token
 
-    useEffect(() => {
-        if (user.token === '')
-            history.push('/');
-    }, [user])
+  const [venues, setVenues] = useState([]);
 
-    useEffect(() => {
-        getVenues()
-            .then(response => {setVenues(response)});
-    }, [])
+  useEffect(() => {
+    if (user.token === '')
+      history.push('/');
+  }, [user])
 
-    return (
-        <>
-            <h1>Venues</h1>
-            {venues.map((venue) => {
-                return <Venue venue={venue} />
-            })}
-            <button onClick={logout}>Log-out</button>
-        </>
-    )
+  useEffect(() => {
+    getVenues(token, idBusiness)
+      .then(response => {setVenues(response)});
+  }, [])
+
+  return (
+    <>
+      <h1>Venues</h1>
+      {venues.map((venue) => {
+        return <Venue venue={venue} />
+      })}
+    </>
+  )
 
 }
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    }
+  return {
+    user: state.user
+  }
 }
 const mapDispatchToProps = {logout};
 

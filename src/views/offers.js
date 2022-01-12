@@ -7,40 +7,39 @@ import {connect} from "react-redux";
 import {logout} from "../redux/actions/user.actions"
 
 function Offers({user, logout}) {
-    const location = useLocation();
-    const history = useHistory();
+  const location = useLocation();
+  const history = useHistory();
 
-    const idBusiness = location.search.split("=")[1];
+  const idVenue = location.search.split("=")[1];
+  const token = user.token;
 
-    const [offers, setOffers] = useState([]);
+  const [offers, setOffers] = useState([]);
 
-    useEffect(() => {
-        if (user.token === '')
-            history.push('/');
-    }, [user])
+  useEffect(() => {
+    if (user.token === '')
+      history.push('/');
+  }, [user])
 
-    useEffect(() => {
-        getOffers(idBusiness)
-            .then(response => {setOffers(response);});
-    }, [])
+  useEffect(() => {
+    getOffers(token, idVenue)
+      .then(response => {setOffers(response);});
+  }, [])
 
-    console.log(offers);
 
-    return (
-        <>
-            <h2>Offers</h2>
-            {offers.map((offer) => {
-                return <Offer offer={offer} />
-            })}
-            <button onClick={logout}>Log out</button>
-        </>
-    );
+  return (
+    <>
+      <h2>Offers</h2>
+      {offers.map((offer) => {
+        return <Offer offer={offer} />
+      })}
+    </>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    }
+  return {
+    user: state.user
+  }
 }
 const mapDispatchToProps = {logout};
 
